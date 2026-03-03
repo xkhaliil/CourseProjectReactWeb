@@ -1,0 +1,30 @@
+.guesses {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(52px, 10vw, 64px);
+  height: clamp(52px, 10vw, 64px);
+  border: 2px solid #355846;
+  border-radius: 7px;
+  background-color: #8fad73;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: bold;
+  text-transform: uppercase;
+  user-select: none;
+  transition: all 0.12s ease;
+  color: #183125;
+  box-shadow: inset 0 -2px 0 rgba(32, 60, 46, 0.2);
+}
