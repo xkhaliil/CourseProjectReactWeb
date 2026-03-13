@@ -10,6 +10,6 @@ describe("App", () => {
         <App />
       </MemoryRouter>,
     )
-    expect(screen.getByText(/Word Clone/i)).toBeInTheDocument()
+    expect(screen.getByText(/Games/i)).toBeInTheDocument()
   })
 })
