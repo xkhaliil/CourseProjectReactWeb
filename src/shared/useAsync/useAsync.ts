@@ -1,4 +1,4 @@
-import { use, useCallback, useEffect, useRef, useState } from "react"
+import { use, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 
 export default function useAsync<Type>(
   fn: (initial: boolean) => Promise<Type>,
@@ -10,7 +10,10 @@ export default function useAsync<Type>(
   },
 ] {
   const fnRef = useRef(fn)
-  fnRef.current = fn
+
+  useLayoutEffect(() => {
+    fnRef.current = fn
+  }, [fn])
 
   const [promise, setPromise] = useState<Promise<Type>>()
 
