@@ -1,3 +1,5 @@
+import useAsync from "../shared/useAsync"
+
 export interface Game {
   id: string
   word: string
@@ -9,7 +11,7 @@ export interface Score {
   gameId: string
   userId: string
   guesses: number
-  duration: number // seconds
+  duration: number
   timestamp: string
 }
 
@@ -53,11 +55,11 @@ const scores: Score[] = [
   { id: "5-5", gameId: "5", userId: "ClassicUI", guesses: 6, duration: 175, timestamp: "2026-03-12T14:05:00.000Z" },
 ]
 
-export const getGames = (): Game[] => {
+export const getGames = async (): Promise<Game[]> => {
   return games
 }
 
-export const getGame = (id: string): Game | undefined => {
+export const getGame = async (id: string): Promise<Game | undefined> => {
   return games.find((g) => g.id === id)
 }
 
@@ -70,6 +72,17 @@ export const getScores = (gameId: string): Score[] => {
     })
 }
 
-export const getTopScores = (gameId: string, limit: number): Score[] => {
+export const getTopScores = async (gameId: string, limit: number): Promise<Score[]> => {
   return getScores(gameId).slice(0, limit)
+}
+
+export function useGames() {
+  return useAsync(() => getGames())
+}
+
+export function useGameDetail(id: string) {
+  return useAsync(
+    () => Promise.all([getGame(id), getTopScores(id, 10)]),
+    [id],
+  )
 }

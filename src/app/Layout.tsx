@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom"
+import { ErrorBoundary } from "react-error-boundary"
 import styles from "./App.module.css"
 
 export const Layout = () => {
@@ -12,7 +13,9 @@ export const Layout = () => {
           Leaderboard
         </Link>
       </nav>
-      <Outlet />
+      <ErrorBoundary fallback={<div>Something went wrong.</div>}>
+        <Outlet />
+      </ErrorBoundary>
     </div>
   )
 }

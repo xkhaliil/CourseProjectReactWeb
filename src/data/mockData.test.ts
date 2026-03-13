@@ -2,16 +2,16 @@ import { describe, expect, it } from "vitest"
 import { getGame, getGames, getScores, getTopScores } from "./mockData"
 
 describe("mockData helpers", () => {
-  it("returns games and can fetch one by id", () => {
-    const games = getGames()
+  it("returns games and can fetch one by id", async () => {
+    const games = await getGames()
     expect(games.length).toBeGreaterThan(0)
-    expect(getGame("1")?.id).toBe("1")
-    expect(getGame("999")).toBeUndefined()
+    expect((await getGame("1"))?.id).toBe("1")
+    expect(await getGame("999")).toBeUndefined()
   })
 
-  it("returns sorted scores and respects top score limit", () => {
+  it("returns sorted scores and respects top score limit", async () => {
     const scores = getScores("1")
-    const topThree = getTopScores("1", 3)
+    const topThree = await getTopScores("1", 3)
 
     expect(topThree.length).toBeLessThanOrEqual(3)
     expect(scores.length).toBeGreaterThanOrEqual(topThree.length)
