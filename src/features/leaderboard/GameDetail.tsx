@@ -17,7 +17,9 @@ export const GameDetail = () => {
         </div>
       )}
     >
-      <Suspense fallback={<div className={styles.detailContainer}>Loading...</div>}>
+      <Suspense
+        fallback={<div className={styles.detailContainer}>Loading...</div>}
+      >
         <GameDetailInner id={id ?? ""} />
       </Suspense>
     </ErrorBoundary>
@@ -32,7 +34,9 @@ const GameDetailInner = ({ id }: { id: string }) => {
   const [game, scores] = result
 
   if (!game) {
-    return <div className={styles.detailContainer}>Loading or Game not found...</div>
+    return (
+      <div className={styles.detailContainer}>Loading or Game not found...</div>
+    )
   }
 
   return <GameDetailView game={game} scores={scores} />

@@ -5,7 +5,9 @@ import { GameDetail } from "./GameDetail"
 
 vi.mock("../../data/mockData", () => ({
   getGame: (id: string) =>
-    Promise.resolve(id === "1" ? { id: "1", word: "APPLE", date: "2023-10-01" } : undefined),
+    Promise.resolve(
+      id === "1" ? { id: "1", word: "APPLE", date: "2023-10-01" } : undefined,
+    ),
   getTopScores: (id: string) =>
     Promise.resolve(
       id === "1"
@@ -40,10 +42,14 @@ describe("GameDetail", () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: /Game #1 - 2023-10-01/i })).toBeInTheDocument()
+      expect(
+        screen.getByRole("heading", { name: /Game #1 - 2023-10-01/i }),
+      ).toBeInTheDocument()
     })
 
-    expect(screen.getByRole("link", { name: "Back to Leaderboard" })).toBeInTheDocument()
+    expect(
+      screen.getByRole("link", { name: "Back to Leaderboard" }),
+    ).toBeInTheDocument()
     expect(screen.getByText("Word: *A***")).toBeInTheDocument()
     expect(screen.getByText("#1")).toBeInTheDocument()
     expect(screen.getByText("Alpha")).toBeInTheDocument()

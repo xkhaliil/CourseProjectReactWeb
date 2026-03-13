@@ -13,8 +13,20 @@ describe("Leaderboard", () => {
   beforeEach(() => {
     vi.mocked(useAsync).mockReturnValue([
       [
-        { id: "UserA", position: 1, rankPoints: 4000, kd: 1.5, matchesPlayed: 100 },
-        { id: "UserB", position: 2, rankPoints: 3900, kd: 1.2, matchesPlayed: 90 },
+        {
+          id: "UserA",
+          position: 1,
+          rankPoints: 4000,
+          kd: 1.5,
+          matchesPlayed: 100,
+        },
+        {
+          id: "UserB",
+          position: 2,
+          rankPoints: 3900,
+          kd: 1.2,
+          matchesPlayed: 90,
+        },
       ],
       { refresh: vi.fn() },
     ])
@@ -27,7 +39,9 @@ describe("Leaderboard", () => {
       </MemoryRouter>,
     )
 
-    expect(screen.getByRole("heading", { name: "R6 Leaderboard" })).toBeInTheDocument()
+    expect(
+      screen.getByRole("heading", { name: "R6 Leaderboard" }),
+    ).toBeInTheDocument()
     expect(screen.getByText(/#1 — UserA/i)).toBeInTheDocument()
     expect(screen.getByText(/#2 — UserB/i)).toBeInTheDocument()
     expect(screen.getByText("4000")).toBeInTheDocument()

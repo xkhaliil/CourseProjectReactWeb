@@ -7,9 +7,9 @@ Word Clone is a game.
 - You need to guess a hidden 5-letter word.
 - You get 6 tries.
 - After each guess, every letter gets a status color:
-	- green: correct letter, correct position
-	- yellow: correct letter, wrong position
-	- dark: letter is not in the word
+  - green: correct letter, correct position
+  - yellow: correct letter, wrong position
+  - dark: letter is not in the word
 
 ## How To Play
 
@@ -21,13 +21,13 @@ Word Clone is a game.
 ## Controls
 
 - Physical keyboard:
-	- A-Z to type
-	- Backspace to delete
-	- Enter to submit
+  - A-Z to type
+  - Backspace to delete
+  - Enter to submit
 - On-screen phone keypad:
-	- One letter per button
-	- BKSP to delete
-	- ENTER to submit
+  - One letter per button
+  - BKSP to delete
+  - ENTER to submit
 
 ## Extra Pages
 

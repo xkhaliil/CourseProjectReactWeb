@@ -1,4 +1,11 @@
-import { use, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import {
+  use,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react"
 
 export default function useAsync<Type>(
   fn: (initial: boolean) => Promise<Type>,

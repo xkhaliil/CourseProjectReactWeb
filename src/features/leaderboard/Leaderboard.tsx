@@ -15,7 +15,9 @@ export const Leaderboard = () => {
         </div>
       )}
     >
-      <Suspense fallback={<div className={styles.leaderboardContainer}>Loading...</div>}>
+      <Suspense
+        fallback={<div className={styles.leaderboardContainer}>Loading...</div>}
+      >
         <LeaderboardInner />
       </Suspense>
     </ErrorBoundary>
@@ -26,9 +28,17 @@ const LeaderboardInner = () => {
   const [page, setPage] = useState(1)
   const [players, { refresh }] = useAsync(() => getR6Leaderboard(page), [page])
 
-  if (!players) return <div className={styles.leaderboardContainer}>Loading...</div>
+  if (!players)
+    return <div className={styles.leaderboardContainer}>Loading...</div>
 
-  return <LeaderboardView players={players} page={page} setPage={setPage} refresh={refresh} />
+  return (
+    <LeaderboardView
+      players={players}
+      page={page}
+      setPage={setPage}
+      refresh={refresh}
+    />
+  )
 }
 
 const LeaderboardView = ({
@@ -72,14 +82,22 @@ const LeaderboardView = ({
         ))}
       </ul>
 
-      <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "16px" }}>
-        <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          justifyContent: "center",
+          marginTop: "16px",
+        }}
+      >
+        <button
+          onClick={() => setPage(Math.max(1, page - 1))}
+          disabled={page === 1}
+        >
           Previous
         </button>
         <span>Page {page}</span>
-        <button onClick={() => setPage(page + 1)}>
-          Next
-        </button>
+        <button onClick={() => setPage(page + 1)}>Next</button>
         <button onClick={refresh}>Refresh</button>
       </div>
 

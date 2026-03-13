@@ -42,7 +42,12 @@ const PHONE_KEYS: PhoneKey[] = [
   { id: "x", label: "X", keyValue: "X", letter: "X" },
   { id: "y", label: "Y", keyValue: "Y", letter: "Y" },
   { id: "z", label: "Z", keyValue: "Z", letter: "Z" },
-  { id: "backspace", label: "BKSP", keyValue: "Backspace", special: "backspace" },
+  {
+    id: "backspace",
+    label: "BKSP",
+    keyValue: "Backspace",
+    special: "backspace",
+  },
   { id: "enter", label: "ENTER", keyValue: "Enter", special: "enter" },
 ]
 

@@ -9,12 +9,7 @@ describe("Guesses", () => {
       (guessWord: string, position: number, rowIndex: number) => LetterStatus
     >(() => "unused")
 
-    render(
-      <Guesses
-        guesses={["HELLO", "WORLD"]}
-        getCellState={getCellState}
-      />,
-    )
+    render(<Guesses guesses={["HELLO", "WORLD"]} getCellState={getCellState} />)
 
     const container = screen.getByTestId("guesses-container")
     expect(container.querySelectorAll("span")).toHaveLength(30)
@@ -25,12 +20,7 @@ describe("Guesses", () => {
       (guessWord: string, position: number, rowIndex: number) => LetterStatus
     >(() => "unused")
 
-    render(
-      <Guesses
-        guesses={["ABCDE"]}
-        getCellState={getCellState}
-      />,
-    )
+    render(<Guesses guesses={["ABCDE"]} getCellState={getCellState} />)
 
     expect(getCellState).toHaveBeenCalledWith("ABCDE", 0, 0)
     expect(getCellState).toHaveBeenCalledWith("ABCDE", 4, 0)
