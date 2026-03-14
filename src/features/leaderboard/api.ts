@@ -8,18 +8,31 @@ export type R6Player = {
 
 export async function getR6Leaderboard(page: number = 1): Promise<R6Player[]> {
   const validPage = Math.max(1, Math.floor(page))
-  const url = import.meta.env.DEV
-    ? `/r6api/api/stats?type=leaderboards&page=${validPage}`
-    : `https://api.r6data.eu/api/stats?type=leaderboards&page=${validPage}`
-  const response = await fetch(url, {
-    headers: {
-      "api-key": import.meta.env.VITE_R6_API_KEY as string,
-    },
-  })
+
+  if (import.meta.env.DEV) {
+    const response = await fetch(
+      `/r6api/api/stats?type=leaderboards&page=${validPage}`,
+      {
+        headers: {
+          "api-key": import.meta.env.VITE_R6_API_KEY as string,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      const text = await response.text()
+      throw new Error(`Failed to fetch leaderboard. ${text}`)
+    }
+
+    return response.json() as Promise<R6Player[]>
+  }
+
+  const response = await fetch(
+    `${import.meta.env.BASE_URL}data/leaderboard.json`,
+  )
 
   if (!response.ok) {
-    const text = await response.text()
-    throw new Error(`Failled to fetch leaderboard. ${text}`)
+    throw new Error(`Failed to fetch leaderboard data.`)
   }
 
   return response.json() as Promise<R6Player[]>
