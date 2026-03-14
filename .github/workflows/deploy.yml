@@ -72,7 +72,7 @@ jobs:
       - name: Fetch leaderboard data
         run: |
           mkdir -p public/data
-          curl -sf -H "api-key: $VITE_R6_API_KEY" \
+          curl --fail -sS -H "api-key: ${{ secrets.VITE_R6_API_KEY }}" \
             "https://api.r6data.eu/api/stats?type=leaderboards&page=1" \
             -o public/data/leaderboard.json
 
