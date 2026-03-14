@@ -26,10 +26,12 @@ export const Leaderboard = () => {
 
 const LeaderboardInner = () => {
   const [page, setPage] = useState(1)
-  const [players, { refresh }] = useAsync(() => getR6Leaderboard(page), [page])
+  const [allPlayers, { refresh }] = useAsync(() => getR6Leaderboard(), [])
 
-  if (!players)
+  if (!allPlayers)
     return <div className={styles.leaderboardContainer}>Loading...</div>
+
+  const players = allPlayers.slice((page - 1) * 5, page * 5)
 
   return (
     <LeaderboardView
@@ -97,7 +99,9 @@ const LeaderboardView = ({
           Previous
         </button>
         <span>Page {page}</span>
-        <button onClick={() => setPage(page + 1)}>Next</button>
+        <button onClick={() => setPage(page + 1)} disabled={players.length < 5}>
+          Next
+        </button>
         <button onClick={refresh}>Refresh</button>
       </div>
 

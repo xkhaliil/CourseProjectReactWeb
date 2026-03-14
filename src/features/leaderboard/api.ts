@@ -7,8 +7,9 @@ export type R6Player = {
 }
 
 export async function getR6Leaderboard(page: number = 1): Promise<R6Player[]> {
+  const targetUrl = `https://api.r6data.eu/api/stats?type=leaderboards&page=${page}`
   const response = await fetch(
-    `https://api.r6data.eu/api/stats?type=leaderboards&page=${page}`,
+    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
     {
       headers: {
         "api-key": import.meta.env.VITE_R6_API_KEY as string,
