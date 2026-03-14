@@ -9,7 +9,7 @@ export type R6Player = {
 export async function getR6Leaderboard(page: number = 1): Promise<R6Player[]> {
   const targetUrl = `https://api.r6data.eu/api/stats?type=leaderboards&page=${page}`
   const response = await fetch(
-    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
     {
       headers: {
         "api-key": import.meta.env.VITE_R6_API_KEY as string,
@@ -19,7 +19,7 @@ export async function getR6Leaderboard(page: number = 1): Promise<R6Player[]> {
 
   if (!response.ok) {
     const text = await response.text()
-    throw new Error(`Failed to fetch leaderboard. ${text}`)
+    throw new Error(`Failled to fetch leaderboard. ${text}`)
   }
 
   return response.json() as Promise<R6Player[]>
