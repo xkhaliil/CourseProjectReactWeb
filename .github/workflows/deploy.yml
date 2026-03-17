@@ -72,9 +72,13 @@ jobs:
       - name: Fetch leaderboard data
         run: |
           mkdir -p public/data
-          curl --fail -sS -H "api-key: ${{ secrets.VITE_R6_API_KEY }}" \
+          if ! curl --fail -sS --retry 5 --retry-all-errors --retry-delay 2 \
+            -H "api-key: ${{ secrets.VITE_R6_API_KEY }}" \
             "https://api.r6data.eu/api/stats?type=leaderboards&page=1" \
-            -o public/data/leaderboard.json
+            -o public/data/leaderboard.json; then
+            echo "::warning::R6 API request failed after retries. Falling back to empty leaderboard data."
+            echo "[]" > public/data/leaderboard.json
+          fi
 
       - name: Build
         run: npm run build -- --base=/${{ github.event.repository.name }}/
