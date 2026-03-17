@@ -164,13 +164,13 @@ verify ──┐
 test   ──┘
 ```
 
-| Job           | What it does                                                                |
-| ------------- | --------------------------------------------------------------------------- |
-| `verify`      | Runs TypeScript, ESLint, and Prettier checks                                |
-| `test`        | Runs the Vitest test suite                                                  |
-| `build`       | Fetches leaderboard data, builds the app, uploads the dist artifact         |
-| `setup-pages` | Enables GitHub Pages on the repo via the GitHub API (idempotent)            |
-| `deploy`      | Deploys the artifact to GitHub Pages (main branch and manual triggers only) |
+| Job           | What it does                                                                                           |
+| ------------- | ------------------------------------------------------------------------------------------------------ |
+| `verify`      | Runs TypeScript, ESLint, and Prettier checks                                                           |
+| `test`        | Runs the Vitest test suite                                                                             |
+| `build`       | Fetches leaderboard data (with retry + empty-data fallback), builds the app, uploads the dist artifact |
+| `setup-pages` | Enables GitHub Pages on the repo via the GitHub API (idempotent)                                       |
+| `deploy`      | Deploys the artifact to GitHub Pages (main branch and manual triggers only)                            |
 
 ### Required secrets
 
