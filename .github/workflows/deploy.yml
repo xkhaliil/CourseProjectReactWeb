@@ -1,0 +1,129 @@
+name: Verify and Deploy
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run lint-typecheck
+      - name: ESLint
+        run: npm run lint-eslint
+      - name: Prettier
+        run: npm run lint-prettier
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm run test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [verify, test]
+
+    env:
+      VITE_R6_API_KEY: ${{ secrets.VITE_R6_API_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch leaderboard data
+        run: |
+          mkdir -p public/data
+          curl --fail -sS -H "api-key: ${{ secrets.VITE_R6_API_KEY }}" \
+            "https://api.r6data.eu/api/stats?type=leaderboards&page=1" \
+            -o public/data/leaderboard.json
+
+      - name: Build
+        run: npm run build -- --base=/${{ github.event.repository.name }}/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  setup-pages:
+    name: Setup Pages
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+
+    permissions:
+      pages: write
+
+    steps:
+      - name: Enable GitHub Pages (idempotent)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" \
+            -X PUT \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/pages \
+            -d '{"source":{"branch":"gh-pages","path":"/"}}' \
+          | grep -qE "^(200|201|409)$" \
+          || echo "Pages already configured or updated."
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: github-pages
+    needs: [build, setup-pages]
+
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    permissions:
+      id-token: write
+      pages: write
+      contents: write
+      packages: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,35 @@
+:root {
+  font-family: "Courier New", "Lucida Console", monospace;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #16311c;
+  background-color: #4c6560;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      1200px 700px at 20% 10%,
+      rgba(142, 169, 160, 0.42),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #415751 0%, #2b3e39 100%);
+  color: #16311c;
+}
+
+button {
+  font-family: inherit;
+  transition:
+    transform 0.08s ease,
+    filter 0.2s ease;
+}
