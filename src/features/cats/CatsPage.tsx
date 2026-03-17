@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { ErrorBoundary } from "react-error-boundary"
-import { useCat, type Cat } from "./api"
+import { useCat, type Cat } from "./api/index.ts"
 import { getErrorMessage } from "#shared/getErrorMessage"
 
 export function CatsPage() {

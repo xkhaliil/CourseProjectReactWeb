@@ -107,40 +107,40 @@ Every file with runtime behaviour has a co-located test file. Run the full suite
 npm test
 ```
 
-| Test file | What it covers |
-|---|---|
-| `app/App.test.tsx` | App shell renders without crashing (covers main.tsx bootstrap indirectly) |
-| `app/Layout.test.tsx` | Nav links render and nested route outlet content appears |
-| `features/home/HomePage.test.tsx` | Heading, game links, link paths |
-| `features/home/index.test.ts` | Barrel re-exports HomePage |
-| `features/play/PlayPage.test.tsx` | Known slug renders game; unknown slug shows error with home link |
-| `features/play/index.test.ts` | Barrel re-exports PlayPage |
-| `features/cats/CatsPage.test.tsx` | Button disabled state, image render, refresh callback |
-| `features/cats/api/cats.test.ts` | `getCat` happy path and HTTP error handling |
-| `features/cats/api/index.test.ts` | Barrel re-exports getCat and useCat |
-| `features/cats/index.test.ts` | Cats game registration shape (title, lazy Play) |
-| `features/game/logic.test.ts` | `evaluateGuess` green/yellow/dark/unused; `calculateKeyboardState` strongest-status rule |
-| `features/game/types.test.ts` | Game type contract verified against the live wordle registration object |
-| `features/game/Game.test.tsx` | Game renders title; keydown event updates the guess grid |
-| `features/game/Guesses.test.tsx` | 6×5 grid renders; getCellState called with correct row/position |
-| `features/game/Keyboard.test.tsx` | All 28 keys render; click dispatches correct KeyboardEvent |
-| `features/game/useGameDisplay.test.ts` | getCellState/getKeyState derive correct values from store state |
-| `features/game/index.test.ts` | Wordle game registration shape (title, lazy Play) |
-| `features/game/Game.integration.test.tsx` | **Comprehensive vertical slice** — store + logic + component, 10 scenarios, zero mocks |
-| `features/leaderboard/Leaderboard.test.tsx` | Heading, 5-per-page display, pagination Previous/Next |
-| `features/leaderboard/GameDetail.test.tsx` | Valid id shows heading/link/word hint; unknown id shows fallback |
-| `features/leaderboard/api/r6.test.ts` | `getR6Leaderboard` happy path and HTTP error |
-| `features/leaderboard/api/games.test.ts` | `getGame` known id, unknown id, all five seeded records |
-| `features/leaderboard/api/index.test.ts` | Barrel re-exports all four API functions |
-| `features/leaderboard/index.test.ts` | Barrel re-exports Leaderboard and GameDetail |
-| `shared/config.test.ts` | Constants have correct values and types |
-| `shared/games.test.ts` | Registry contains wordle and cats; every entry has title and Play |
-| `shared/getErrorMessage/index.test.ts` | Error instance, plain string, and unknown value branches |
-| `shared/store/gameSlice.test.ts` | typeKey, deleteLetter, submitGuess, resetGame — all edge cases |
-| `shared/store/leaderboardSlice.test.ts` | setPage, nextPage, prevPage (floor guard), resetPage |
-| `shared/store/index.test.ts` | Scoped hooks expose only their slice — no cross-slice data leakage |
-| `shared/useAsync/useAsync.test.tsx` | Resolves value on mount; refresh triggers re-fetch |
-| `shared/useAsync/index.test.ts` | Barrel re-exports useAsync as default |
+| Test file                                   | What it covers                                                                           |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `app/App.test.tsx`                          | App shell renders without crashing (covers main.tsx bootstrap indirectly)                |
+| `app/Layout.test.tsx`                       | Nav links render and nested route outlet content appears                                 |
+| `features/home/HomePage.test.tsx`           | Heading, game links, link paths                                                          |
+| `features/home/index.test.ts`               | Barrel re-exports HomePage                                                               |
+| `features/play/PlayPage.test.tsx`           | Known slug renders game; unknown slug shows error with home link                         |
+| `features/play/index.test.ts`               | Barrel re-exports PlayPage                                                               |
+| `features/cats/CatsPage.test.tsx`           | Button disabled state, image render, refresh callback                                    |
+| `features/cats/api/cats.test.ts`            | `getCat` happy path and HTTP error handling                                              |
+| `features/cats/api/index.test.ts`           | Barrel re-exports getCat and useCat                                                      |
+| `features/cats/index.test.ts`               | Cats game registration shape (title, lazy Play)                                          |
+| `features/game/logic.test.ts`               | `evaluateGuess` green/yellow/dark/unused; `calculateKeyboardState` strongest-status rule |
+| `features/game/types.test.ts`               | Game type contract verified against the live wordle registration object                  |
+| `features/game/Game.test.tsx`               | Game renders title; keydown event updates the guess grid                                 |
+| `features/game/Guesses.test.tsx`            | 6×5 grid renders; getCellState called with correct row/position                          |
+| `features/game/Keyboard.test.tsx`           | All 28 keys render; click dispatches correct KeyboardEvent                               |
+| `features/game/useGameDisplay.test.ts`      | getCellState/getKeyState derive correct values from store state                          |
+| `features/game/index.test.ts`               | Wordle game registration shape (title, lazy Play)                                        |
+| `features/game/Game.integration.test.tsx`   | **Comprehensive vertical slice** — store + logic + component, 10 scenarios, zero mocks   |
+| `features/leaderboard/Leaderboard.test.tsx` | Heading, 5-per-page display, pagination Previous/Next                                    |
+| `features/leaderboard/GameDetail.test.tsx`  | Valid id shows heading/link/word hint; unknown id shows fallback                         |
+| `features/leaderboard/api/r6.test.ts`       | `getR6Leaderboard` happy path and HTTP error                                             |
+| `features/leaderboard/api/games.test.ts`    | `getGame` known id, unknown id, all five seeded records                                  |
+| `features/leaderboard/api/index.test.ts`    | Barrel re-exports all four API functions                                                 |
+| `features/leaderboard/index.test.ts`        | Barrel re-exports Leaderboard and GameDetail                                             |
+| `shared/config.test.ts`                     | Constants have correct values and types                                                  |
+| `shared/games.test.ts`                      | Registry contains wordle and cats; every entry has title and Play                        |
+| `shared/getErrorMessage/index.test.ts`      | Error instance, plain string, and unknown value branches                                 |
+| `shared/store/gameSlice.test.ts`            | typeKey, deleteLetter, submitGuess, resetGame — all edge cases                           |
+| `shared/store/leaderboardSlice.test.ts`     | setPage, nextPage, prevPage (floor guard), resetPage                                     |
+| `shared/store/index.test.ts`                | Scoped hooks expose only their slice — no cross-slice data leakage                       |
+| `shared/useAsync/useAsync.test.tsx`         | Resolves value on mount; refresh triggers re-fetch                                       |
+| `shared/useAsync/index.test.ts`             | Barrel re-exports useAsync as default                                                    |
 
 ## How to Play
 
@@ -164,20 +164,20 @@ verify ──┐
 test   ──┘
 ```
 
-| Job | What it does |
-|---|---|
-| `verify` | Runs TypeScript, ESLint, and Prettier checks |
-| `test` | Runs the Vitest test suite |
-| `build` | Fetches leaderboard data, builds the app, uploads the dist artifact |
-| `setup-pages` | Enables GitHub Pages on the repo via the GitHub API (idempotent) |
-| `deploy` | Deploys the artifact to GitHub Pages (main branch and manual triggers only) |
+| Job           | What it does                                                                |
+| ------------- | --------------------------------------------------------------------------- |
+| `verify`      | Runs TypeScript, ESLint, and Prettier checks                                |
+| `test`        | Runs the Vitest test suite                                                  |
+| `build`       | Fetches leaderboard data, builds the app, uploads the dist artifact         |
+| `setup-pages` | Enables GitHub Pages on the repo via the GitHub API (idempotent)            |
+| `deploy`      | Deploys the artifact to GitHub Pages (main branch and manual triggers only) |
 
 ### Required secrets
 
-| Secret | Where to get it |
-|---|---|
-| `VITE_R6_API_KEY` | R6 Data API portal |
-| `GITHUB_TOKEN` | Provided automatically by GitHub Actions |
+| Secret            | Where to get it                          |
+| ----------------- | ---------------------------------------- |
+| `VITE_R6_API_KEY` | R6 Data API portal                       |
+| `GITHUB_TOKEN`    | Provided automatically by GitHub Actions |
 
 ---
 

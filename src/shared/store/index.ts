@@ -1,6 +1,9 @@
 import { create } from "zustand"
 import { createGameSlice, type GameSlice } from "./gameSlice"
-import { createLeaderboardSlice, type LeaderboardSlice } from "./leaderboardSlice"
+import {
+  createLeaderboardSlice,
+  type LeaderboardSlice,
+} from "./leaderboardSlice"
 
 type AppStore = GameSlice & LeaderboardSlice
 

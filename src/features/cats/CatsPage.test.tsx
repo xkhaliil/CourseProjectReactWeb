@@ -2,11 +2,11 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import { describe, it, expect, vi, beforeEach } from "vitest"
 import { CatsPage } from "./CatsPage"
 
-vi.mock("./api", () => ({
+vi.mock("./api/index.ts", () => ({
   useCat: vi.fn(),
 }))
 
-import { useCat } from "./api"
+import { useCat } from "./api/index.ts"
 
 describe("CatsPage", () => {
   beforeEach(() => {

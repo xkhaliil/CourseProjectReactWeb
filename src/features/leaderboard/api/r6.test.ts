@@ -8,7 +8,13 @@ afterEach(() => {
 describe("r6 API module", () => {
   it("getR6Leaderboard returns typed player array on success", async () => {
     const mockData = [
-      { id: "TopPlayer", kd: 2.1, matchesPlayed: 300, rankPoints: 6000, position: 1 },
+      {
+        id: "TopPlayer",
+        kd: 2.1,
+        matchesPlayed: 300,
+        rankPoints: 6000,
+        position: 1,
+      },
     ]
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,

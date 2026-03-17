@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest"
 import { MemoryRouter, Route, Routes } from "react-router-dom"
 import { GameDetail } from "./GameDetail"
 
-vi.mock("./api", () => ({
+vi.mock("./api/index.ts", () => ({
   useGame: (id: string) => [
     id === "1" ? { id: "1", word: "APPLE", date: "2023-10-01" } : undefined,
     { refresh: vi.fn() },

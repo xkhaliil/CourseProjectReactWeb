@@ -1,8 +1,8 @@
 import { Suspense } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useParams, Link } from "react-router-dom"
-import { useGame } from "./api"
-import type { GameRecord } from "./api"
+import { useGame } from "./api/index.ts"
+import type { GameRecord } from "./api/index.ts"
 import { getErrorMessage } from "#shared/getErrorMessage"
 import styles from "./GameDetail.module.css"
 

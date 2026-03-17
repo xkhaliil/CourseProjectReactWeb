@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { ErrorBoundary } from "react-error-boundary"
-import { useR6Leaderboard, type R6Player } from "./api"
+import { useR6Leaderboard, type R6Player } from "./api/index.ts"
 import { useLeaderboardStore } from "#shared/store"
 import { getErrorMessage } from "#shared/getErrorMessage"
 import styles from "./Leaderboard.module.css"

@@ -3,11 +3,11 @@ import { describe, expect, it, vi, beforeEach } from "vitest"
 import { MemoryRouter } from "react-router-dom"
 import { Leaderboard } from "./Leaderboard"
 
-vi.mock("./api", () => ({
+vi.mock("./api/index.ts", () => ({
   useR6Leaderboard: vi.fn(),
 }))
 
-import { useR6Leaderboard } from "./api"
+import { useR6Leaderboard } from "./api/index.ts"
 
 const MOCK_PLAYERS = Array.from({ length: 6 }, (_, i) => ({
   id: `User${String.fromCharCode(65 + i)}`,
@@ -19,7 +19,10 @@ const MOCK_PLAYERS = Array.from({ length: 6 }, (_, i) => ({
 
 describe("Leaderboard", () => {
   beforeEach(() => {
-    vi.mocked(useR6Leaderboard).mockReturnValue([MOCK_PLAYERS, { refresh: vi.fn() }])
+    vi.mocked(useR6Leaderboard).mockReturnValue([
+      MOCK_PLAYERS,
+      { refresh: vi.fn() },
+    ])
   })
 
   it("renders the heading", () => {
@@ -28,7 +31,9 @@ describe("Leaderboard", () => {
         <Leaderboard />
       </MemoryRouter>,
     )
-    expect(screen.getByRole("heading", { name: "R6 Leaderboard" })).toBeInTheDocument()
+    expect(
+      screen.getByRole("heading", { name: "R6 Leaderboard" }),
+    ).toBeInTheDocument()
   })
 
   it("renders the first page of players (5 per page)", () => {

@@ -1,6 +1,9 @@
 import { describe, it, expect, beforeEach } from "vitest"
 import { create } from "zustand"
-import { createLeaderboardSlice, type LeaderboardSlice } from "./leaderboardSlice"
+import {
+  createLeaderboardSlice,
+  type LeaderboardSlice,
+} from "./leaderboardSlice"
 
 function makeStore() {
   return create<LeaderboardSlice>()((...args) =>
